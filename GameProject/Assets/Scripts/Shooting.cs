@@ -9,12 +9,26 @@ public class Shooting : MonoBehaviour
     bool canShootThisFrame;
     bool controllerConnected = false;
 
+    WeaponTypes selectedWeapon = WeaponTypes.Pistol;
+
     public Bullet Bullet;
     public Trap Trap;
-    public float shotCooldown = 0.5f;
+    float shotCooldown;
     int controller;
 
     float currentShotCooldown;
+
+    float GetWeaponCooldownTime(WeaponTypes weapon)
+    {
+        switch (weapon)
+        {
+            case WeaponTypes.Pistol: return 0.5f;
+            case WeaponTypes.Rifle: return 0.05f;
+            case WeaponTypes.Shotgun: return 0.3f;
+            case WeaponTypes.ROCKET_LAUNCHER: return 1f;
+            default: return 0.5f;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +40,8 @@ public class Shooting : MonoBehaviour
                 controllerConnected = true;
             }
         }
-        
+
+        this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
         this.currentShotCooldown = this.shotCooldown;
     }
 
@@ -47,18 +62,6 @@ public class Shooting : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("X" + controller))
-        {
-            print("Mashine!!");
-            if(this.shotCooldown == 0.5)
-            {
-                this.shotCooldown = 0.05f;
-            } else
-            {
-                this.shotCooldown = 0.5f;
-            }    
-        }
-
         this.canShootThisFrame = false;
 
         if(Input.GetMouseButtonDown(1))
@@ -76,10 +79,11 @@ public class Shooting : MonoBehaviour
             canShoot = true;
             canShootThisFrame = true;
         }
+
         if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
-        {   
-            print("Maschine Gun");
-            this.shotCooldown = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
+        {
+            this.selectedWeapon = WeaponTypes.Rifle;
+            this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
         }
     }
 
@@ -117,16 +121,15 @@ public class Shooting : MonoBehaviour
         bullet.dir = pos;
         bullet.speed = 0.6f;
         bullet.damage = 37;
-        if(shotCooldown < 0.31 && shotCooldown > 0.29)
-        {   
-            print("Hallo Shotgun");
+        if(this.selectedWeapon == WeaponTypes.Shotgun)
+        {
             float angle = 10 * Mathf.PI/180;
             Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
             bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
             bullet2.speed = 0.6f;
             bullet2.damage = 37;
-            Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);        
+            Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
             bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
             bullet3.speed = 0.6f;
