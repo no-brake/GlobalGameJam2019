@@ -34,3 +34,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+GameProject/Assets/Scenes/SampleScene.unity

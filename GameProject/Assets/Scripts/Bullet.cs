@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     public float speed;
     public Vector3 dir;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,25 @@ public class Bullet : MonoBehaviour
 
         void OnTriggerEnter (Collider col)
     {   
-        Destroy(gameObject);
-        print ("Player collided with" + col.GetComponent<Collider>().gameObject.name);
+        
+        if(col.GetComponent<Collider>().gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            col.GetComponent<Collider>().gameObject.GetComponent<Enemy>().health -= damage;
+        }   
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+/*          if(col.gameObject.tag == "Enemy")
+         {
+             Destroy(gameObject);
+             Destroy(col.gameObject);
+         }
+         else  */if(col.gameObject.name == "Wall")
+        {
+            print("Hit the wall");
+            Destroy(gameObject);
+        }
     }
 }
