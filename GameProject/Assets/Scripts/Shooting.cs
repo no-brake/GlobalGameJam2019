@@ -61,6 +61,11 @@ public class Shooting : MonoBehaviour
             print("you can  shoot");
             canShoot = true;
         }
+        if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
+        {   
+            print("Maschine Gun");
+            frequence = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
+        }
     }
 
     void OnTriggerExit(Collider col)
