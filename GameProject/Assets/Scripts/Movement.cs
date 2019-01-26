@@ -8,17 +8,15 @@ public class Movement : MonoBehaviour
     public int rotationSpeed = 10;
     public int rotationOffset = 180;
     public float yOffset = 0.5f;
+    public int controller;
 
     bool controllerConnected = false;
 
     // Start is called before the first frame update
     void Start()
     {   
-        for (int i = 0; i < Input.GetJoystickNames().Length; i++){
-            if (Input.GetJoystickNames()[i].Length > 0) {
-                controllerConnected = true;
-                break;
-            }
+        if(Input.GetJoystickNames()[controller].Length > 0){
+            controllerConnected = true;
         }
     }
 
@@ -26,8 +24,8 @@ public class Movement : MonoBehaviour
     void Update()
     {
         //-----Move the player
-        float xLeft = Input.GetAxis("HorizontalLeft");
-        float yLeft = Input.GetAxis("VerticalLeft");
+        float xLeft = Input.GetAxis("HorizontalLeft" + controller);
+        float yLeft = Input.GetAxis("VerticalLeft" + controller);
 
         transform.Translate(new Vector3(xLeft * Time.deltaTime * transformSpeed , 0, -yLeft * Time.deltaTime * transformSpeed), Space.World);
 
@@ -42,8 +40,8 @@ public class Movement : MonoBehaviour
             transform.rotation =  Quaternion.Euler (new Vector3(0f, -a + rotationOffset, 0f));
         } else {
             //-----Rotate the player -> with gamepad
-            float xRight = Input.GetAxis("HorizontalRight");
-            float yRight = Input.GetAxis("VerticalRight");
+            float xRight = Input.GetAxis("HorizontalRight" + controller);
+            float yRight = Input.GetAxis("VerticalRight" + controller);
 
             if (xRight != 0.0f || yRight != 0.0f) {
                 float angle = Mathf.Atan2(yRight, xRight) * Mathf.Rad2Deg;
