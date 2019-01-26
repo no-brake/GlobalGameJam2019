@@ -412,7 +412,7 @@ MonoBehaviour:
   DeceasedPhantom: {fileID: 6685909125800143776, guid: 59f04ee230e0e1643ae43c691429e86c,
     type: 3}
   Oriax: {fileID: 9210887313213102194, guid: aeb6cf0f57764154eb27ff8aa47b42d7, type: 3}
-  spawner:
+  spawners:
   - {fileID: 357336277}
   - {fileID: 691384204}
   - {fileID: 1331876851}
