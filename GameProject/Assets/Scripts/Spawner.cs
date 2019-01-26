@@ -26,6 +26,7 @@ public class Spawner : MonoBehaviour
            Enemy enemy = Instantiate(Enemy,pos + new Vector3(0,1,0),Quaternion.identity);
            enemy.target = new Vector3(0,1,0);
            enemy.speed = 0.1F;
+           enemy.health = 100;
            timeToSpawn = 5F;
        }
     }
