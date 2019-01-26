@@ -21,7 +21,25 @@ public class Bullet : MonoBehaviour
 
         void OnTriggerEnter (Collider col)
     {   
-        Destroy(gameObject);
-        print ("Player collided with" + col.GetComponent<Collider>().gameObject.name);
+        
+        if(col.GetComponent<Collider>().gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            Destroy(col.GetComponent<Collider>().gameObject);
+        }   
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+/*          if(col.gameObject.tag == "Enemy")
+         {
+             Destroy(gameObject);
+             Destroy(col.gameObject);
+         }
+         else  */if(col.gameObject.tag == "Wall")
+        {
+            print("Hit the wall");
+            Destroy(gameObject);
+        }
     }
 }
