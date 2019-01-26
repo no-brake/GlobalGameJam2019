@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
                 controllerConnected = true;
             }
         }
-
+        
         this.currentShotCooldown = this.shotCooldown;
     }
 
@@ -108,6 +108,21 @@ public class Shooting : MonoBehaviour
         bullet.dir = pos;
         bullet.speed = 0.6f;
         bullet.damage = 37;
+        if(shotCooldown < 0.31 && shotCooldown > 0.29)
+        {   
+            print("Hallo Shotgun");
+            float angle = 10 * Mathf.PI/180;
+            Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
+            bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
+            bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
+            bullet2.speed = 0.6f;
+            bullet2.damage = 37;
+            Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);        
+            bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
+            bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
+            bullet3.speed = 0.6f;
+            bullet3.damage = 37;
+        }
     }
 
     void createTrap()
