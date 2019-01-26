@@ -15,8 +15,15 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        if(Input.GetJoystickNames()[controller].Length > 0){
-            controllerConnected = true;
+
+        for(int i = 0; i < Input.GetJoystickNames().Length; i++){
+            print("i: " + Input.GetJoystickNames()[i]);
+        }
+        if(Input.GetJoystickNames().Length > 0){
+            if(Input.GetJoystickNames()[controller].Length > 0){
+                controllerConnected = true;
+                print("controller connected");
+            }
         }
     }
 

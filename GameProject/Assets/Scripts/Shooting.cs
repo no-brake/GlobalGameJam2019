@@ -10,15 +10,18 @@ public class Shooting : MonoBehaviour
 
     public Bullet Bullet;
     public float shotCooldown = 0.5f;
+    int controller;
+
     float currentShotCooldown;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < Input.GetJoystickNames().Length; i++){
-            if (Input.GetJoystickNames()[i].Length > 0) {           
+        Movement myScript = this.GetComponentInParent<Movement>();
+        controller = myScript.controller;
+        if(Input.GetJoystickNames().Length > 0){
+            if (Input.GetJoystickNames()[controller].Length > 0) {
                 controllerConnected = true;
-                break;
             }
         }
 
@@ -30,7 +33,7 @@ public class Shooting : MonoBehaviour
     {
         this.currentShotCooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper"))
+        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper" + controller))
         {
             if(canShoot && this.currentShotCooldown <= 0)
             {
@@ -40,7 +43,7 @@ public class Shooting : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("X"))
+        if(Input.GetButtonDown("X" + controller))
         {
             print("Mashine!!");
             if(this.shotCooldown == 0.5)
