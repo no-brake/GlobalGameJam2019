@@ -11,7 +11,7 @@ public class Shooting : MonoBehaviour
     bool controllerConnected = false;
 
     public Bullet Bullet;
-    public int frequence = 25;
+    public float frequence = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +52,11 @@ public class Shooting : MonoBehaviour
         {   
             print("you can  shoot");
             canShoot = true;
+        }
+        if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
+        {   
+            print("Maschine Gun");
+            frequence = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
         }
     }
 
