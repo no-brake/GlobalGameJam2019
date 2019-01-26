@@ -8,10 +8,13 @@ public class Bullet : MonoBehaviour
     public Vector3 dir;
     public int damage;
 
+    AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
         Destroy(gameObject, 2.0f);
     }
 
