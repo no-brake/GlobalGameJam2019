@@ -51,7 +51,8 @@ public class Movement : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        // reset position and velocity
+        transform.position = new Vector3(transform.position.x, yOffset, transform.position.z);
 
         if (gameObject.GetComponent<Rigidbody>()){
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
