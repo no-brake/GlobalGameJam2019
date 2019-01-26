@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    int x, y;
-    float cooldown;
     int bulletNum;
     bool canShoot;
     bool controllerConnected = false;
 
     public Bullet Bullet;
-    public int frequence = 25;
+    public float shotCooldown = 0.5f;
+    float currentShotCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -22,25 +21,34 @@ public class Shooting : MonoBehaviour
                 break;
             }
         }
+
+        this.currentShotCooldown = this.shotCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(canShoot && Time.frameCount % frequence == 0) 
+        this.currentShotCooldown -= Time.deltaTime;
+
+        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper"))
         {
-            print("Print");
-            createBullet();
+            if(canShoot && this.currentShotCooldown <= 0)
+            {
+                createBullet();
+
+                this.currentShotCooldown = this.shotCooldown;
+            }
         }
+
         if(Input.GetButtonDown("X"))
         {
             print("Mashine!!");
-            if(frequence ==1)
+            if(this.shotCooldown == 0.5)
             {
-                frequence = 25;
-            }else
+                this.shotCooldown = 0.05f;
+            } else
             {
-                frequence = 1;
+                this.shotCooldown = 0.5f;
             }    
         }
     }
@@ -53,6 +61,11 @@ public class Shooting : MonoBehaviour
             print("you can  shoot");
             canShoot = true;
         }
+        if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
+        {   
+            print("Maschine Gun");
+            this.shotCooldown = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
+        }
     }
 
     void OnTriggerExit(Collider col)
@@ -64,37 +77,27 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void  createBullet()
+    void createBullet()
     {
         Transform trans = this.gameObject.transform;
         Vector3 pos = new Vector3();
-        bool shoot = false;
 
         if (!controllerConnected) {
-            if((Input.GetMouseButton(0))) 
-            {
-                Vector3 mousePos = Input.mousePosition ;
-                mousePos.z = Camera.main.transform.position.y;
-                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = Camera.main.transform.position.y;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-                pos = mousePos - trans.position;
-                pos.y = 0;
-                shoot = true;
-            }
+            pos = mousePos - trans.position;
         } else {
-            bool trigger = Input.GetButton("Right Bumper");
-            if(trigger) {
-                shoot = true;
-                pos = trans.rotation * Vector3.right;
-                pos.y = 0;
-            }
+            pos = trans.rotation * Vector3.right;
         }
-        if (shoot) {
-            pos = Vector3.Normalize(pos);
-            Bullet bullet = Instantiate(Bullet, trans.position + pos, trans.rotation);
-            bullet.dir = pos;
-            bullet.speed = 0.6f;
-            bullet.damage = 37;
-        }
+
+        pos.y = 0;
+        pos = Vector3.Normalize(pos);
+
+        Bullet bullet = Instantiate(Bullet, trans.position + pos, trans.rotation);
+        bullet.dir = pos;
+        bullet.speed = 0.6f;
+        bullet.damage = 37;
     }
 }
