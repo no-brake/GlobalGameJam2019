@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour
 {
     int bulletNum;
     bool canShoot;
+    bool canShootThisFrame;
     bool controllerConnected = false;
 
     public Bullet Bullet;
@@ -30,7 +31,9 @@ public class Shooting : MonoBehaviour
     {
         this.currentShotCooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper"))
+        if (this.canShootThisFrame) this.canShoot = true;
+
+        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper0"))
         {
             if(canShoot && this.currentShotCooldown <= 0)
             {
@@ -40,7 +43,7 @@ public class Shooting : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("X"))
+        if(Input.GetButtonDown("X0"))
         {
             print("Mashine!!");
             if(this.shotCooldown == 0.5)
@@ -51,6 +54,8 @@ public class Shooting : MonoBehaviour
                 this.shotCooldown = 0.5f;
             }    
         }
+
+        this.canShootThisFrame = false;
     }
 
 
@@ -60,6 +65,7 @@ public class Shooting : MonoBehaviour
         {   
             print("you can  shoot");
             canShoot = true;
+            canShootThisFrame = true;
         }
         if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
         {   
@@ -70,7 +76,7 @@ public class Shooting : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-         if(col.GetComponent<Collider>().gameObject.tag == "shootArea")
+        if(col.GetComponent<Collider>().gameObject.tag == "shootArea")
         {   
             print("you can't shoot");
             canShoot = false;
@@ -82,7 +88,8 @@ public class Shooting : MonoBehaviour
         Transform trans = this.gameObject.transform;
         Vector3 pos = new Vector3();
 
-        if (!controllerConnected) {
+        if (!controllerConnected)
+        {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.transform.position.y;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -94,8 +101,10 @@ public class Shooting : MonoBehaviour
 
         pos.y = 0;
         pos = Vector3.Normalize(pos);
+        Vector3 bulletStartPos = trans.position + pos;
+        bulletStartPos.y = 1.0f;
 
-        Bullet bullet = Instantiate(Bullet, trans.position + pos, trans.rotation);
+        Bullet bullet = Instantiate(Bullet, bulletStartPos, trans.rotation);
         bullet.dir = pos;
         bullet.speed = 0.6f;
         bullet.damage = 37;
