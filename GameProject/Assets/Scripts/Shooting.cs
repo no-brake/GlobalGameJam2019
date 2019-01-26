@@ -17,7 +17,7 @@ public class Shooting : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < Input.GetJoystickNames().Length; i++){
-            if (Input.GetJoystickNames()[i].Length > 0) {
+            if (Input.GetJoystickNames()[i].Length > 0) {           
                 controllerConnected = true;
                 break;
             }
@@ -29,7 +29,19 @@ public class Shooting : MonoBehaviour
     {
         if(canShoot && Time.frameCount % frequence == 0) 
         {
+            print("Print");
             createBullet();
+        }
+        if(Input.GetButtonDown("X"))
+        {
+            print("Mashine!!");
+            if(frequence ==1)
+            {
+                frequence = 25;
+            }else
+            {
+                frequence = 1;
+            }    
         }
     }
 
@@ -62,7 +74,7 @@ public class Shooting : MonoBehaviour
             if((Input.GetMouseButton(0))) 
             {
                 Vector3 mousePos = Input.mousePosition ;
-                mousePos.z = 20;
+                mousePos.z = Camera.main.transform.position.y;
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
                 pos = mousePos - trans.position;
