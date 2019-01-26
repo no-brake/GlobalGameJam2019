@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2093720076770069237, guid: 1682466fab7bfa148881a1a25030c763, type: 3}
+  frequence: 0
 --- !u!54 &456057840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1100,6 +1101,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 0832af69bd0848340aedcde77070b326, type: 3}
+      objectReference: {fileID: 8300000, guid: dd6edebcd37ad544c8d26fb3ad0d9f46, type: 3}
+    - target: {fileID: 5804263885232116419, guid: 716e4adca5a1ed140b8539be22040f1d,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804263885232116419, guid: 716e4adca5a1ed140b8539be22040f1d,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 6b1e1f3777f2b3e4486cfe2df23041e2,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 716e4adca5a1ed140b8539be22040f1d, type: 3}
