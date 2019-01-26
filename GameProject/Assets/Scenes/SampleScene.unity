@@ -408,7 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3921aeb302c74244e80f2e9e314d336f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3459209906412901478, guid: 0e0fa31d008082946b50eeaf8f393244, type: 3}
+  Watcher: {fileID: 7621454259232454233, guid: c9b78bcff6cb7b946a4da20d5bc3c85e, type: 3}
+  DeceasedPhantom: {fileID: 6685909125800143776, guid: 59f04ee230e0e1643ae43c691429e86c,
+    type: 3}
+  Oriax: {fileID: 9210887313213102194, guid: aeb6cf0f57764154eb27ff8aa47b42d7, type: 3}
   spawner:
   - {fileID: 357336277}
   - {fileID: 691384204}
@@ -4153,6 +4156,7 @@ MonoBehaviour:
   text: {fileID: 821293156}
   kills: 0
   houseHealth: 0
+  spawnCount: 0
 --- !u!4 &1726518746
 Transform:
   m_ObjectHideFlags: 0
