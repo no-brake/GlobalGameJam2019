@@ -7,31 +7,30 @@ public class Shooting : MonoBehaviour
     int x, y;
     float cooldown;
     int bulletNum;
+    bool canShoot;
+    bool controllerConnected = false;
+
     public Bullet Bullet;
-    bool canShoot, isShooting;
-    int frequence;
+    public int frequence = 25;
+
     // Start is called before the first frame update
     void Start()
     {
-        frequence = 25;
+        for (int i = 0; i < Input.GetJoystickNames().Length; i++){
+            if (Input.GetJoystickNames()[i].Length > 0) {
+                controllerConnected = true;
+                break;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetMouseButtonDown(0)  && canShoot) 
-       {
+        if(canShoot && Time.frameCount % frequence == 0) 
+        {
             createBullet();
-            isShooting = true;
-       }   
-       if(Input.GetMouseButtonUp(0))
-       {
-           isShooting = false;
-       }
-       if(isShooting && canShoot &&  Time.frameCount % frequence == 0)
-       {
-           createBullet();
-       }
+        }
     }
 
 
@@ -55,19 +54,35 @@ public class Shooting : MonoBehaviour
 
     void  createBullet()
     {
-        Vector3 mousePos = Input.mousePosition ;
-           
-        mousePos.z = 20;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        
         Transform trans = this.gameObject.transform;
+        Vector3 pos = new Vector3();
+        bool shoot = false;
 
-        Vector3 pos = mousePos - trans.position;
-        pos.y = 0;
-        pos = Vector3.Normalize(pos);
-        Bullet bullet = Instantiate(Bullet,trans.position + pos,trans.rotation);
-        bullet.speed = 0.6F;
-        bullet.dir = pos;
-        bullet.damage = 37;
+        if (!controllerConnected) {
+            if((Input.GetMouseButton(0))) 
+            {
+                Vector3 mousePos = Input.mousePosition ;
+                mousePos.z = 20;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+                pos = mousePos - trans.position;
+                pos.y = 0;
+                shoot = true;
+            }
+        } else {
+            bool trigger = Input.GetButton("Right Bumper");
+            if(trigger) {
+                shoot = true;
+                pos = trans.rotation * Vector3.right;
+                pos.y = 0;
+            }
+        }
+        if (shoot) {
+            pos = Vector3.Normalize(pos);
+            Bullet bullet = Instantiate(Bullet, trans.position + pos, trans.rotation);
+            bullet.dir = pos;
+            bullet.speed = 0.6f;
+            bullet.damage = 37;
+        }
     }
 }
