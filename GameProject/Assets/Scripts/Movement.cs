@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float transformSpeed = 10;
+    public float transformSpeed = 10f;
     public int rotationSpeed = 10;
     public int rotationOffset = 180;
+    public float yOffset = 0.5f;
 
     bool controllerConnected = false;
 
@@ -48,6 +49,12 @@ public class Movement : MonoBehaviour
                 float angle = Mathf.Atan2(yRight, xRight) * Mathf.Rad2Deg;
                 transform.eulerAngles = new Vector3(0f, angle, 0f);
             }
+        }
+
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+
+        if (gameObject.GetComponent<Rigidbody>()){
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
         }
 
     }
