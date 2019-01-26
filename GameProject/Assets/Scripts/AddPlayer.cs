@@ -33,20 +33,18 @@ public class AddPlayer : MonoBehaviour
             }
         }
 
-        print(player1HasController + ", " + player2HasController);
-
         if(player1HasController && player2HasController) {
             GameObject p1 = Instantiate(player1, startPlayer1, Quaternion.identity);
             p1.GetComponent<Movement>().controller = 0;
             GameObject p2 = Instantiate(player2, startPlayer2, Quaternion.identity);
             p2.GetComponent<Movement>().controller = 1;
             // both use controller
-        } else if(player1HasController || player2HasController) {
-            // assign player1 a controller and player2 use keyboard and mouse
+        } else if(player1HasController) {
             GameObject p1 = Instantiate(player1, startPlayer1, Quaternion.identity);
             p1.GetComponent<Movement>().controller = 0;
-            GameObject p2 = Instantiate(player2, startPlayer2, Quaternion.identity);
-            p2.GetComponent<Movement>().controller = 1;
+        } else if(player2HasController) {
+            GameObject p1 = Instantiate(player1, startPlayer1, Quaternion.identity);
+            p1.GetComponent<Movement>().controller = 1;
         } else {
             // only one player plays the game
             GameObject p1 = Instantiate(player1, startPlayer1, Quaternion.identity);
