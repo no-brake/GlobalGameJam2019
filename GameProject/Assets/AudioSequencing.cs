@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class AudioSequencing : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioSource backgroundMusicIntro;
+    public AudioSource backgroundMusicLoop;
 
-    // Update is called once per frame
-    void Update()
+    private bool startedLoop;
+    
+    void FixedUpdate() 
     {
-        
+      if(!backgroundMusicIntro.isPlaying && !startedLoop) 
+        {
+            backgroundMusicLoop.Play();
+            startedLoop = true;
+        }
     }
 }
