@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
     bool controllerConnected = false;
 
     public Bullet Bullet;
+    public Trap Trap;
     public float shotCooldown = 0.5f;
     float currentShotCooldown;
 
@@ -30,7 +31,7 @@ public class Shooting : MonoBehaviour
     {
         this.currentShotCooldown -= Time.deltaTime;
 
-        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper"))
+        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper0"))
         {
             if(canShoot && this.currentShotCooldown <= 0)
             {
@@ -40,7 +41,7 @@ public class Shooting : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("X"))
+        if(Input.GetButtonDown("X0"))
         {
             print("Mashine!!");
             if(this.shotCooldown == 0.5)
@@ -50,6 +51,11 @@ public class Shooting : MonoBehaviour
             {
                 this.shotCooldown = 0.5f;
             }    
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            createTrap();
         }
     }
 
@@ -99,5 +105,13 @@ public class Shooting : MonoBehaviour
         bullet.dir = pos;
         bullet.speed = 0.6f;
         bullet.damage = 37;
+    }
+
+    void createTrap()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.transform.position.y;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Instantiate(Trap, mousePos, Quaternion.identity);
     }
 }
