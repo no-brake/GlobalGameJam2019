@@ -34,11 +34,7 @@ public class Shooting : MonoBehaviour
     {
         this.currentShotCooldown -= Time.deltaTime;
 
-<<<<<<< HEAD
-        if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper0"))
-=======
         if (Input.GetMouseButton(0) || Input.GetButton("Right Bumper" + controller))
->>>>>>> 9da3d40ef03ae70ceec71541f38ab8b66fe96be8
         {
             if(canShoot && this.currentShotCooldown <= 0)
             {
@@ -48,11 +44,7 @@ public class Shooting : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-        if(Input.GetButtonDown("X0"))
-=======
         if(Input.GetButtonDown("X" + controller))
->>>>>>> 9da3d40ef03ae70ceec71541f38ab8b66fe96be8
         {
             print("Mashine!!");
             if(this.shotCooldown == 0.5)
