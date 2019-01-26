@@ -8,9 +8,12 @@ public class Enemy : MonoBehaviour
     public float speed;
     public int health;
     // Start is called before the first frame update
+
+    AudioSource audioData;
     void Start()
     {
-        
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
     }
 
     // Update is called once per frame
