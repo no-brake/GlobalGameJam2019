@@ -64,7 +64,7 @@ public class Shooting : MonoBehaviour
         if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
         {   
             print("Maschine Gun");
-            frequence = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
+            this.shotCooldown = col.GetComponent<Collider>().gameObject.GetComponent<WeaponSpot>().wcooldown;
         }
     }
 
