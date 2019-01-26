@@ -141,3 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62414372c9ae914f973ad3225961285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusicIntro: {fileID: 6099258892763564128}
+  backgroundMusicLoop: {fileID: 6099258892763564128}

@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
 
         transform.Translate(new Vector3(xLeft * Time.deltaTime * transformSpeed , 0, -yLeft * Time.deltaTime * transformSpeed), Space.World);
 
-        if(!controllerConnected) {
+        if(!controllerConnected && controller < 1) {
             //-----Rotate the player -> with Mouse
             //Get the Screen positions of the object
             Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (transform.position);
