@@ -21,9 +21,10 @@ public class Spawner : MonoBehaviour
         if(timeToSpawn <= 0)
         {    
             float scale = Mathf.Max(transform.localScale.x,transform.localScale.z);
-            float ran = Random.Range(-1.0F,1.0F);
-            Vector3 pos  = transform.position + ran * new Vector3(0,0,scale*5);
-            Enemy enemy = Instantiate(Enemy,pos + new Vector3(0,1,0),Quaternion.identity);
+            float ran   = Random.Range(-1.0F,1.0F);
+            Vector3 pos = transform.position + ran * new Vector3(0,0,scale*5);
+            Vector3 dir = -(pos + new Vector3(0,1,0)) + target.transform.position;
+            Enemy enemy = Instantiate(Enemy,pos + new Vector3(0,1,0), Quaternion.LookRotation(dir, new Vector3(0,1,0))); 
             enemy.target = target.transform.position;
             enemy.speed = 0.1F;
             enemy.health = 100;
