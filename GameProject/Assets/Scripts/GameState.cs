@@ -9,12 +9,14 @@ public class GameState : MonoBehaviour
 
     public int kills;
     public float houseHealth;
+    public int spawnCount;
 
     // Start is called before the first frame update
     void Start()
     {
         this.kills = 0;
         this.houseHealth = 100;
+        this.spawnCount = 0;
     }
 
     // Update is called once per frame
