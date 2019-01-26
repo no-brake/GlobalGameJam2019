@@ -9,19 +9,18 @@ public class SpawnManager : MonoBehaviour
     public Enemy Oriax;
     public List<Spawner> spawners = new List<Spawner>();
 
-    float timeToSpawn;
-    float hardcodedRandomGeneratedFactorForSimultanousSpawnPrevention;
+    public float timeToSpawn;
+    float currentTimeToSpawn;
 
     private GameState gameState;
 
     // Start is called before the first frame update
     void Start()
     {
-        hardcodedRandomGeneratedFactorForSimultanousSpawnPrevention = Random.Range(0f, 3f);
-        timeToSpawn = 5F + hardcodedRandomGeneratedFactorForSimultanousSpawnPrevention;
-
         GameObject gameStateObject = GameObject.Find("GameState");
         this.gameState = gameStateObject.GetComponent<GameState>();
+
+        this.currentTimeToSpawn = timeToSpawn;
     }
 
     // Update is called once per frame
@@ -32,8 +31,8 @@ public class SpawnManager : MonoBehaviour
         Spawner selectedSpawner = spawners[spawnerId];
         GameObject target = selectedSpawner.target;
 
-        timeToSpawn -= Time.deltaTime;
-        if (timeToSpawn <= 0)
+        currentTimeToSpawn -= Time.deltaTime;
+        if (currentTimeToSpawn <= 0)
         {
             gameState.spawnCount++;
 
@@ -53,7 +52,7 @@ public class SpawnManager : MonoBehaviour
                 }
             }
 
-            timeToSpawn = 3f;
+            currentTimeToSpawn = timeToSpawn + Random.Range(-1.5f, 1.5f);
         }
     }
 }
