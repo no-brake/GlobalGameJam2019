@@ -16,8 +16,13 @@ public class Enemy : MonoBehaviour
     private GameState gameState;
 
     // Start is called before the first frame update
+
+    AudioSource audioData;
     void Start()
     {
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
+        
         GameObject gameStateObject = GameObject.Find("GameState");
         this.gameState = gameStateObject.GetComponent<GameState>();
 

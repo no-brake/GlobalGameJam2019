@@ -52,6 +52,7 @@ MonoBehaviour:
   rotationSpeed: 10
   rotationOffset: 180
   yOffset: 0.5
+  controller: 0
 --- !u!114 &5927784446635832354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +66,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2093720076770069237, guid: 1682466fab7bfa148881a1a25030c763, type: 3}
-  frequence: 25
+  Trap: {fileID: 8732115226375801146, guid: 5420d228e5c41554c83b830cf05df581, type: 3}
+  shotCooldown: 0.5
 --- !u!54 &5927784446635832357
 Rigidbody:
   m_ObjectHideFlags: 0
