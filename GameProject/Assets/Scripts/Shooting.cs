@@ -144,7 +144,7 @@ public class Shooting : MonoBehaviour
 
         pos.y = 0;
         pos = Vector3.Normalize(pos);
-        Vector3 bulletStartPos = trans.position + pos;
+        Vector3 bulletStartPos = trans.position + 1.8f * pos;
         bulletStartPos.y = 1.0f;
 
         bool isSpecial = this.selectedWeapon == WeaponTypes.Special_Gun || this.selectedWeapon == WeaponTypes.SUPER_WEAPON;
@@ -160,7 +160,7 @@ public class Shooting : MonoBehaviour
             for(int i = 0; i < 10; i++){
                 if(i==5) continue;
                 float angle = (10- 2*i) * Mathf.PI/180;
-                Bullet bullet2 = Instantiate(isSpecial ? specialBullet : Bullet, trans.position + pos, trans.rotation);
+                Bullet bullet2 = Instantiate(isSpecial ? specialBullet : Bullet, trans.position + 1.8f * pos, trans.rotation);
                 bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
                 bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
                 bullet2.speed = 0.6f - Random.Range(0.0f,0.5f);

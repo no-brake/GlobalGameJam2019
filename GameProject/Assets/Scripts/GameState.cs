@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class GameState : MonoBehaviour
     void Start()
     {
         this.kills = 0;
-        this.houseHealth = 100;
+        this.houseHealth = 10;
         this.spawnCount = 0;
     }
 
@@ -23,8 +24,10 @@ public class GameState : MonoBehaviour
     void Update()
     {
         if(this.houseHealth <= 0)
-        {
-            text.text = "DU BIST TOT!";
+        {   
+            GlobalState.day++;
+            SceneManager.LoadScene("SampleScene");
+            //text.text = "DU BIST TOT!";
         }
     }
 }
