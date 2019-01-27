@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GlobalState
 {
-    public static int day = 0;
+    public static int day = 1;
 
 
 }
