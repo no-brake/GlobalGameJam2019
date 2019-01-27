@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
                 }
                 else
                 {
-                    selectedSpawner.SpawnEnemy(DeceasedPhantom, 0.08f, 500, 3f, 5f);
+                    selectedSpawner.SpawnEnemy(DeceasedPhantom, 0.08f, 150, 3f, 3f);
                 }
             }
 
