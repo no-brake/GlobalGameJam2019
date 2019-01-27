@@ -14,7 +14,10 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         audioData = GetComponent<AudioSource>();
-        audioData.Play(0);
+        if (audioData)
+        {
+            audioData.Play(0);
+        }
         Destroy(gameObject, 2.0f);
     }
 

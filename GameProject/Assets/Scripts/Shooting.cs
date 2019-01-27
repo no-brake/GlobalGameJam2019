@@ -19,6 +19,8 @@ public class Shooting : MonoBehaviour
 
     float currentShotCooldown;
 
+    GameObject walls;
+
 
     float GetWeaponCooldownTime(WeaponTypes weapon)
     {
@@ -29,6 +31,7 @@ public class Shooting : MonoBehaviour
             case WeaponTypes.Shotgun: return 0.8f;
             case WeaponTypes.Special_Gun: return 0.3f;
             case WeaponTypes.ROCKET_LAUNCHER: return 1f;
+            case WeaponTypes.SUPER_WEAPON: return 0.05f;
             default: return 0.5f;
         }
     }
@@ -47,6 +50,8 @@ public class Shooting : MonoBehaviour
         this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
         this.currentShotCooldown = this.shotCooldown;
         this.canShoot = true;
+
+        walls = GameObject.Find("Walls");
     }
 
     // Update is called once per frame
@@ -77,6 +82,10 @@ public class Shooting : MonoBehaviour
         {
             this.selectedWeapon = WeaponTypes.Special_Gun;
         }
+        if(Input.GetKeyDown("n"))
+        {
+            this.selectedWeapon = WeaponTypes.SUPER_WEAPON;
+        }
     }
 
 
@@ -87,6 +96,11 @@ public class Shooting : MonoBehaviour
             print("you can  shoot");
             canShoot = true;
             canShootThisFrame = true;
+        }
+
+        if(col.GetComponent<Collider>().gameObject.tag == "Door")
+        {
+            walls.SetActive(!walls.activeSelf);
         }
 
         if(col.GetComponent<Collider>().gameObject.name == "SpotRifle")
@@ -134,7 +148,7 @@ public class Shooting : MonoBehaviour
         bulletStartPos.y = 1.0f;
 
         Bullet bullet;
-        if (this.selectedWeapon == WeaponTypes.Special_Gun)
+        if (this.selectedWeapon == WeaponTypes.Special_Gun || this.selectedWeapon == WeaponTypes.SUPER_WEAPON)
         {
             bullet = Instantiate(specialBullet, bulletStartPos, trans.rotation);
         }
@@ -147,8 +161,8 @@ public class Shooting : MonoBehaviour
         bullet.speed = 0.6f;
         bullet.damage = 37;
 
-        if(this.selectedWeapon == WeaponTypes.Shotgun)
-        {   
+        if(this.selectedWeapon == WeaponTypes.Shotgun || this.selectedWeapon == WeaponTypes.SUPER_WEAPON)
+        {
             bullet.damage = 120;
             float angle = 10 * Mathf.PI/180;
             Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
@@ -166,7 +180,7 @@ public class Shooting : MonoBehaviour
         if (this.selectedWeapon == WeaponTypes.Special_Gun)
         {
             bullet.speed = 0.4f;
-            bullet.damage = 123;
+            bullet.damage = 135;
         }
     }
 

@@ -17,10 +17,10 @@ public class UpgradeManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        print(2 * (int) weaponSpots[0].GetComponent<WeaponSpot>().weapon);
+    {
         for(int i = 0; i< weaponSpots.Length; i++)
-        {   WeaponTypes weap = weaponSpots[i].GetComponent<WeaponSpot>().weapon;
+        {
+            WeaponTypes weap = weaponSpots[i].GetComponent<WeaponSpot>().weapon;
             switch(weap)
             {
                 case WeaponTypes.Shotgun:

@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
             if(gameState)
             {
                 gameState.kills++;
-                print("Kills :" + gameState.kills);
+                print("Kills: " + gameState.kills);
             }
 
             Destroy(gameObject);

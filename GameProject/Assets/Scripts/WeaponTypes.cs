@@ -8,5 +8,6 @@ public enum WeaponTypes
     Rifle,
     Shotgun,
     Special_Gun,
-    ROCKET_LAUNCHER    
+    ROCKET_LAUNCHER,
+    SUPER_WEAPON
 }
