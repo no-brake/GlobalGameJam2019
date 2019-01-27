@@ -38,12 +38,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        /*          if(col.gameObject.tag == "Enemy")
-                 {
-                     Destroy(gameObject);
-                     Destroy(col.gameObject);
-                 }
-                 else  */
         if (col.gameObject.tag == "Wall")
         {
             //print("Hit the wall");

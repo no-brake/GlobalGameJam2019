@@ -8,6 +8,7 @@ TagManager:
   - shootArea
   - Wall
   - WeaponSpot
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Bullet
   m_SortingLayers:
   - name: Default
     uniqueID: 0

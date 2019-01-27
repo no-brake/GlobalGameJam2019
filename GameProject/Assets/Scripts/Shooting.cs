@@ -147,20 +147,24 @@ public class Shooting : MonoBehaviour
         bullet.speed = 0.6f;
         bullet.damage = 37;
 
-        if(this.selectedWeapon == WeaponTypes.Shotgun)
-        {   
+        if(true)//this.selectedWeapon == WeaponTypes.Shotgun)
+        {
             bullet.damage = 120;
-            float angle = 10 * Mathf.PI/180;
+            for(int i = 0; i < 10; i++){
+                if(i==5)continue;
+            float angle = (10- 2*i) * Mathf.PI/180;
             Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
             bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
-            bullet2.speed = 0.6f;
+            bullet2.speed = 0.6f - Random.Range(0.0f,0.5f);
             bullet2.damage = 80;
-            Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
-            bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
-            bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
-            bullet3.speed = 0.6f;
-            bullet3.damage = 80;
+            Destroy(bullet2, 1f);
+            // Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
+            // bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
+            // bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
+            // bullet3.speed = 0.6f;
+            // bullet3.damage = 80;
+            }
         }
 
         if (this.selectedWeapon == WeaponTypes.Special_Gun)
