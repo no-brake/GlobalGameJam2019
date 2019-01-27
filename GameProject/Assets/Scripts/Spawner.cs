@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject target;
      
-    public void SpawnEnemy(Enemy enemy, float speed, int health)
+    public void SpawnEnemy(Enemy enemy, float speed, int health, float timeToDmg, float dmg)
     {
         float ran = Random.Range(-1.0F, 1.0F);
         float scale = Mathf.Max(transform.localScale.x, transform.localScale.z);
@@ -17,5 +17,7 @@ public class Spawner : MonoBehaviour
         spawnedEnemy.target = target.transform.position;
         spawnedEnemy.speed = speed;
         spawnedEnemy.health = health;
+        spawnedEnemy.timeToDmg = timeToDmg;
+        spawnedEnemy.houseHealthDamageValue = dmg;
     }
 }
