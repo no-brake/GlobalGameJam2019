@@ -45,19 +45,24 @@ public class GameState : MonoBehaviour
         fadePlane.GetComponent<MeshRenderer>().material.color = Color.Lerp(fadePlane.GetComponent<MeshRenderer>().material.color, alpha, timeToFade*Time.deltaTime);
         dayText.color = Color.Lerp(dayText.color, dayTextColor, timeToFade * Time.deltaTime * 2);
 
-        if(this.houseHealth <= 0)
+        if(this.houseHealth <= 9)
         {
-            dayText.text = "Day " + (GlobalState.day + 1);
-            dayTextColor.a = 1;
-            alpha.a = 1;
-            fadePlane.GetComponent<MeshRenderer>().material.color = Color.Lerp(fadePlane.GetComponent<MeshRenderer>().material.color, alpha, timeToFade*Time.deltaTime);
-            dayText.color = Color.Lerp(dayText.color,dayTextColor, timeToFade * Time.deltaTime * 2);
-            Debug.Log("DayTextColor: " + dayText.color.a); 
-            if(dayText.color.a > 0.9) {
+            if(GlobalState.day < 4) {
+                dayText.text = "Day " + (GlobalState.day + 1);
+                dayTextColor.a = 1;
+                alpha.a = 1;
+                fadePlane.GetComponent<MeshRenderer>().material.color = Color.Lerp(fadePlane.GetComponent<MeshRenderer>().material.color, alpha, timeToFade*Time.deltaTime);
+                dayText.color = Color.Lerp(dayText.color,dayTextColor, timeToFade * Time.deltaTime * 2);
+                Debug.Log("DayTextColor: " + dayText.color.a);
+
+                if(dayText.color.a > 0.9) {
                 GlobalState.day++;
                 SceneManager.LoadScene("SampleScene");
+                }
+            } else {
+                //FADE IN GAME OVER SCREEN
+                SceneManager.LoadScene("MainMenu");
             }
-            //text.text = "DU BIST TOT!";
         }
 
     }
