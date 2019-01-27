@@ -30,8 +30,8 @@ public class SpawnManager : MonoBehaviour
         {
             return;
         }
+        
         int spawnerId = (int)Random.Range(0f, (float)spawners.Count);
-
         Spawner selectedSpawner = spawners[spawnerId];
         GameObject target = selectedSpawner.target;
 

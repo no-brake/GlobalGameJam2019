@@ -55,7 +55,31 @@ public class GameState : MonoBehaviour
             Debug.Log("DayTextColor: " + dayText.color.a); 
             if(dayText.color.a > 0.9) {
                 GlobalState.day++;
+                List<Spawner> sMListe = GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawners;
+                if(GlobalState.day >= 2)
+                {   
+                    GameObject parent = GameObject.Find("Spawner");
+                    Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
+                    foreach(Transform t in trs){
+                        if(t.name == "Spawner_Vert_Win7"){
+                         sMListe.Add(t.gameObject.GetComponent<Spawner>());
+                         print("active 1");
+                        }
+                    } 
+                }
+                if(GlobalState.day >= 3)
+                {
+                    GameObject parent = GameObject.Find("Spawner");
+                    Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
+                    foreach(Transform t in trs){
+                        if(t.name == "Spawner_Hori_Win6"){
+                         sMListe.Add(t.gameObject.GetComponent<Spawner>());
+                         print("active 2");
+                        }
+                    } 
+                }
                 SceneManager.LoadScene("SampleScene");
+
             }
             //text.text = "DU BIST TOT!";
         }
