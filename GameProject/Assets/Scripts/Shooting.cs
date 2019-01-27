@@ -43,6 +43,7 @@ public class Shooting : MonoBehaviour
 
         this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
         this.currentShotCooldown = this.shotCooldown;
+        this.canShoot = true;
     }
 
     // Update is called once per frame
@@ -92,7 +93,7 @@ public class Shooting : MonoBehaviour
         if(col.GetComponent<Collider>().gameObject.tag == "shootArea")
         {   
             print("you can't shoot");
-            canShoot = false;
+            //canShoot = false;
         }
     }
 
