@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour
 {   
@@ -11,16 +12,18 @@ public class Victory : MonoBehaviour
         GameObject gameStateObject = GameObject.Find("GameState");
         this.gameState = gameStateObject.GetComponent<GameState>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     void OnDestroy()
     {
-        gameState.text.color = Color.green;
-        gameState.text.text = "Du bist Kacke!";
+                if(gameState.houseHealth > 0 && GlobalState.day > 1) {
+                    GlobalState.day--;
+                } else if(gameState.houseHealth > 0 && GlobalState.day == 1) {
+                    
+                } else {
+                    GlobalState.day++;
+                }
+                GlobalState.shownDay++;
+
+                SceneManager.LoadScene("SampleScene");
     }
 }
