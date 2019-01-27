@@ -12,12 +12,12 @@ public class Shooting : MonoBehaviour
     WeaponTypes selectedWeapon = WeaponTypes.Pistol;
 
     public Bullet Bullet;
+    public Bullet specialBullet;
     public Trap Trap;
     float shotCooldown;
     int controller;
 
     float currentShotCooldown;
-
 
 
     float GetWeaponCooldownTime(WeaponTypes weapon)
@@ -27,6 +27,7 @@ public class Shooting : MonoBehaviour
             case WeaponTypes.Pistol: return 0.5f;
             case WeaponTypes.Rifle: return 0.05f;
             case WeaponTypes.Shotgun: return 0.8f;
+            case WeaponTypes.Special_Gun: return 0.3f;
             case WeaponTypes.ROCKET_LAUNCHER: return 1f;
             default: return 0.5f;
         }
@@ -70,6 +71,11 @@ public class Shooting : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             createTrap();
+        }
+
+        if(Input.GetKeyDown("u"))
+        {
+            this.selectedWeapon = WeaponTypes.Special_Gun;
         }
     }
 
@@ -127,10 +133,20 @@ public class Shooting : MonoBehaviour
         Vector3 bulletStartPos = trans.position + pos;
         bulletStartPos.y = 1.0f;
 
-        Bullet bullet = Instantiate(Bullet, bulletStartPos, trans.rotation);
+        Bullet bullet;
+        if (this.selectedWeapon == WeaponTypes.Special_Gun)
+        {
+            bullet = Instantiate(specialBullet, bulletStartPos, trans.rotation);
+        }
+        else
+        {
+            bullet = Instantiate(Bullet, bulletStartPos, trans.rotation);
+        }
+
         bullet.dir = pos;
         bullet.speed = 0.6f;
         bullet.damage = 37;
+
         if(this.selectedWeapon == WeaponTypes.Shotgun)
         {   
             bullet.damage = 120;
@@ -143,6 +159,56 @@ public class Shooting : MonoBehaviour
             Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
             bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
+            bullet3.speed = 0.6f;
+            bullet3.damage = 80;
+        }
+
+        if (this.selectedWeapon == WeaponTypes.Special_Gun)
+        {
+            bullet.speed = 0.4f;
+            bullet.damage = 123;
+        }
+    }
+
+    void SpecialShot()
+    {
+        Transform trans = this.gameObject.transform;
+        Vector3 pos = new Vector3();
+
+        if (!controllerConnected)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = Camera.main.transform.position.y;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            pos = mousePos - trans.position;
+        }
+        else
+        {
+            pos = trans.rotation * Vector3.right;
+        }
+
+        pos.y = 0;
+        pos = Vector3.Normalize(pos);
+        Vector3 bulletStartPos = trans.position + pos;
+        bulletStartPos.y = 1.0f;
+
+        Bullet bullet = Instantiate(Bullet, bulletStartPos, trans.rotation);
+        bullet.dir = pos;
+        bullet.speed = 0.6f;
+        bullet.damage = 37;
+        if (this.selectedWeapon == WeaponTypes.Shotgun)
+        {
+            bullet.damage = 120;
+            float angle = 10 * Mathf.PI / 180;
+            Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
+            bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
+            bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
+            bullet2.speed = 0.6f;
+            bullet2.damage = 80;
+            Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
+            bullet3.dir.x = Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
+            bullet3.dir.z = Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
             bullet3.speed = 0.6f;
             bullet3.damage = 80;
         }
