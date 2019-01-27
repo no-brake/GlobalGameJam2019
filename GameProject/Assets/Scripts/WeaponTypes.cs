@@ -7,5 +7,6 @@ public enum WeaponTypes
     Pistol,
     Rifle,
     Shotgun,
+    Special_Gun,
     ROCKET_LAUNCHER    
 }

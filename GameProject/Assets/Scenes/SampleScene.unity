@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2457,6 +2457,23 @@ PrefabInstance:
       propertyPath: shotCooldown
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5927784446635832354, guid: b6ad386b9b48c414bb58eed1c30623b9,
+        type: 3}
+      propertyPath: Bullet
+      value: 
+      objectReference: {fileID: 2093720076770069237, guid: 1682466fab7bfa148881a1a25030c763,
+        type: 3}
+    - target: {fileID: 5927784446635832354, guid: b6ad386b9b48c414bb58eed1c30623b9,
+        type: 3}
+      propertyPath: specialBullet
+      value: 
+      objectReference: {fileID: 7621407366418020195, guid: dbde351a93c8bbe4ebd8436031e5f786,
+        type: 3}
+    - target: {fileID: 5927784446635832352, guid: b6ad386b9b48c414bb58eed1c30623b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5927784446635832357, guid: b6ad386b9b48c414bb58eed1c30623b9,
         type: 3}
       propertyPath: m_Constraints
@@ -2466,11 +2483,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5927784446635832352, guid: b6ad386b9b48c414bb58eed1c30623b9,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5927784446971793885, guid: b6ad386b9b48c414bb58eed1c30623b9,
         type: 3}
