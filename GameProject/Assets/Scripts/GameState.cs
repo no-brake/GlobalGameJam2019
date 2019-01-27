@@ -24,7 +24,7 @@ public class GameState : MonoBehaviour
     void Start()
     {
         this.kills = 0;
-        this.houseHealth = 10;
+        this.houseHealth = 30;
         this.spawnCount = 0;
 
         //if (GlobalState.day <= 3) {
