@@ -31,7 +31,7 @@ public class GameState : MonoBehaviour
         alpha = fadePlane.GetComponent<MeshRenderer>().material.color;
         alpha.a = 0;
         dayText = fadePlane.GetComponentInChildren<Text>();
-        dayText.text = "Day " + GlobalState.day;
+        dayText.text = "Day " + GlobalState.shownDay;
         dayTextColor = dayText.color;
         dayTextColor.a = 0;
         //}
@@ -48,7 +48,7 @@ public class GameState : MonoBehaviour
         if(this.houseHealth <= 9)
         {
             if(GlobalState.day < 4) {
-                dayText.text = "Day " + (GlobalState.day + 1);
+                dayText.text = "Day " + (GlobalState.shownDay + 1);
                 dayTextColor.a = 1;
                 alpha.a = 1;
                 fadePlane.GetComponent<MeshRenderer>().material.color = Color.Lerp(fadePlane.GetComponent<MeshRenderer>().material.color, alpha, timeToFade*Time.deltaTime);
@@ -57,6 +57,7 @@ public class GameState : MonoBehaviour
 
                 if(dayText.color.a > 0.9) {
                 GlobalState.day++;
+                GlobalState.shownDay++;
                 List<Spawner> sMListe = GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawners;
                 if(GlobalState.day >= 2)
                 {   
@@ -83,6 +84,9 @@ public class GameState : MonoBehaviour
                 SceneManager.LoadScene("SampleScene");
                 }
             } else {
+                //TODO: RESET EVERY VARIABLE NECESSARY!!
+                GlobalState.day = 1;
+                GlobalState.shownDay = 1;
                 //FADE IN GAME OVER SCREEN
                 SceneManager.LoadScene("MainMenu");
             }
