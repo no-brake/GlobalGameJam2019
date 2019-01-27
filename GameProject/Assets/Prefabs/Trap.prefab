@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trapTime: 3
+  phantom: {fileID: 2800000, guid: 29ab63010e4616d4386a55e07350e6af, type: 3}
+  bossMoss: {fileID: 2800000, guid: 07574231773c48946b2cf9e3979572e3, type: 3}
 --- !u!23 &8732115226375801147
 MeshRenderer:
   m_ObjectHideFlags: 0

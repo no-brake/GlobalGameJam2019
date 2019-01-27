@@ -5,8 +5,12 @@ using UnityEngine;
 public class Trap: MonoBehaviour
 {
     public float trapTime;
+    public Texture2D phantom;
+    public Texture2D bossMoss;
+    private Texture2D oldTexture;
     GameObject eminem;
     float oldSpeed;
+    Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +24,9 @@ public class Trap: MonoBehaviour
         {
             trapTime -= Time.deltaTime;
             if(trapTime <= 0)
-            {
-                eminem.GetComponent<Enemy>().speed = oldSpeed;
+            {   
+                rend.material.mainTexture = oldTexture;
+                eminem.GetComponent<Enemy>().speed= oldSpeed;
                 trapTime = 3; 
                 Destroy(gameObject);
             }
@@ -41,6 +46,10 @@ public class Trap: MonoBehaviour
                 eminem  = col.GetComponent<Collider>().gameObject;
                 oldSpeed = eminem.GetComponent<Enemy>().speed;
                 eminem.GetComponent<Enemy>().speed = 0;
+               
+                rend = eminem.GetComponentsInChildren<Renderer>()[0];
+                oldTexture = (Texture2D)rend.material.mainTexture;
+                rend.material.mainTexture = phantom;
             }    
         }
     }
