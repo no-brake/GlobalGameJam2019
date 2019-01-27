@@ -17,13 +17,9 @@ public class Victory : MonoBehaviour
     {
                 if(gameState.houseHealth > 0 && GlobalState.day > 1) {
                     GlobalState.day--;
-                } else if(gameState.houseHealth > 0 && GlobalState.day == 1) {
-                    
-                } else {
-                    GlobalState.day++;
+                    GlobalState.shownDay++;
                 }
-                GlobalState.shownDay++;
-
+                
                 SceneManager.LoadScene("SampleScene");
     }
 }
