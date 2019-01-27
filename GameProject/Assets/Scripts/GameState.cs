@@ -34,6 +34,37 @@ public class GameState : MonoBehaviour
         dayText.text = "Day " + GlobalState.day;
         dayTextColor = dayText.color;
         dayTextColor.a = 0;
+        List<Spawner> sMListe = GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawners;
+        print(sMListe.Count);
+        if(GlobalState.day == 1){
+            GameObject.Find("shootAreaDay2").SetActive(false);
+        }
+        if(GlobalState.day == 1 || GlobalState.day == 1 ){
+            GameObject.Find("leftBottomAreaDay3").SetActive(false);
+        }
+
+        if(GlobalState.day == 2)
+            {   
+                GameObject parent = GameObject.Find("Spawner");
+                Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
+                foreach(Transform t in trs){
+                    if(t.name == "Spawner_Vert_Win7"){
+                        sMListe.Add(t.gameObject.GetComponent<Spawner>());
+                        //print(sMListe.Count);
+                    }
+                } 
+            }
+            if(GlobalState.day == 3)
+            {
+                GameObject parent = GameObject.Find("Spawner");
+                Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
+                foreach(Transform t in trs){
+                   if(t.name == "Spawner_Hori_Win6"){
+                     sMListe.Add(t.gameObject.GetComponent<Spawner>());
+                     print(sMListe.Count);
+                    }
+                } 
+            }
         //}
 
 
@@ -45,7 +76,7 @@ public class GameState : MonoBehaviour
         fadePlane.GetComponent<MeshRenderer>().material.color = Color.Lerp(fadePlane.GetComponent<MeshRenderer>().material.color, alpha, timeToFade*Time.deltaTime);
         dayText.color = Color.Lerp(dayText.color, dayTextColor, timeToFade * Time.deltaTime * 2);
 
-        if(this.houseHealth <= 9)
+        if(this.houseHealth <= 0)
         {
             if(GlobalState.day < 4) {
                 dayText.text = "Day " + (GlobalState.day + 1);
@@ -57,29 +88,8 @@ public class GameState : MonoBehaviour
 
                 if(dayText.color.a > 0.9) {
                 GlobalState.day++;
-                List<Spawner> sMListe = GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawners;
-                if(GlobalState.day >= 2)
-                {   
-                    GameObject parent = GameObject.Find("Spawner");
-                    Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
-                    foreach(Transform t in trs){
-                        if(t.name == "Spawner_Vert_Win7"){
-                         sMListe.Add(t.gameObject.GetComponent<Spawner>());
-                         print("active 1");
-                        }
-                    } 
-                }
-                if(GlobalState.day >= 3)
-                {
-                    GameObject parent = GameObject.Find("Spawner");
-                    Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
-                    foreach(Transform t in trs){
-                        if(t.name == "Spawner_Hori_Win6"){
-                         sMListe.Add(t.gameObject.GetComponent<Spawner>());
-                         print("active 2");
-                        }
-                    } 
-                }
+
+
                 SceneManager.LoadScene("SampleScene");
                 }
             } else {
