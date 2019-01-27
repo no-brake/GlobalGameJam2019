@@ -18,13 +18,15 @@ public class Shooting : MonoBehaviour
 
     float currentShotCooldown;
 
+
+
     float GetWeaponCooldownTime(WeaponTypes weapon)
     {
         switch (weapon)
         {
             case WeaponTypes.Pistol: return 0.5f;
             case WeaponTypes.Rifle: return 0.05f;
-            case WeaponTypes.Shotgun: return 0.3f;
+            case WeaponTypes.Shotgun: return 0.8f;
             case WeaponTypes.ROCKET_LAUNCHER: return 1f;
             default: return 0.5f;
         }
@@ -32,7 +34,7 @@ public class Shooting : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         Movement myScript = this.GetComponentInParent<Movement>();
         controller = myScript.controller;
         if(Input.GetJoystickNames().Length > 0){
@@ -81,9 +83,16 @@ public class Shooting : MonoBehaviour
             canShootThisFrame = true;
         }
 
-        if(col.GetComponent<Collider>().gameObject.tag == "WeaponSpot")
-        {
+        if(col.GetComponent<Collider>().gameObject.name == "SpotRifle")
+        {   
+            print("Rifle");
             this.selectedWeapon = WeaponTypes.Rifle;
+            this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
+        }
+        if(col.GetComponent<Collider>().gameObject.name == "SpotShotgun")
+        {
+            print("shotgun");
+            this.selectedWeapon = WeaponTypes.Shotgun;
             this.shotCooldown = GetWeaponCooldownTime(this.selectedWeapon);
         }
     }
@@ -123,18 +132,19 @@ public class Shooting : MonoBehaviour
         bullet.speed = 0.6f;
         bullet.damage = 37;
         if(this.selectedWeapon == WeaponTypes.Shotgun)
-        {
+        {   
+            bullet.damage = 120;
             float angle = 10 * Mathf.PI/180;
             Bullet bullet2 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet2.dir.x = Mathf.Cos(angle) * pos.x - Mathf.Sin(angle) * pos.z;
             bullet2.dir.z = Mathf.Sin(angle) * pos.x + Mathf.Cos(angle) * pos.z;
             bullet2.speed = 0.6f;
-            bullet2.damage = 37;
+            bullet2.damage = 80;
             Bullet bullet3 = Instantiate(Bullet, trans.position + pos, trans.rotation);
             bullet3.dir.x =  Mathf.Cos(-angle) * pos.x - Mathf.Sin(-angle) * pos.z;
             bullet3.dir.z =  Mathf.Sin(-angle) * pos.x + Mathf.Cos(-angle) * pos.z;
             bullet3.speed = 0.6f;
-            bullet3.damage = 37;
+            bullet3.damage = 80;
         }
     }
 

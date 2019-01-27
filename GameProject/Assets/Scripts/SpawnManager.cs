@@ -13,19 +13,23 @@ public class SpawnManager : MonoBehaviour
     float currentTimeToSpawn;
 
     private GameState gameState;
-
+    private bool isRunning;
     // Start is called before the first frame update
     void Start()
     {
         GameObject gameStateObject = GameObject.Find("GameState");
         this.gameState = gameStateObject.GetComponent<GameState>();
-
+        isRunning = true;
         this.currentTimeToSpawn = timeToSpawn;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!isRunning)
+        {
+            return;
+        }
         int spawnerId = (int)Random.Range(0f, (float)spawners.Count);
 
         Spawner selectedSpawner = spawners[spawnerId];
@@ -39,6 +43,7 @@ public class SpawnManager : MonoBehaviour
             if (gameState.spawnCount >= 50)
             {
                 selectedSpawner.SpawnEnemy(Oriax, 0.04f, 1000);
+                isRunning = false;
             } else
             {
                 float randomSpawnChance = Random.Range(0f, 1f);

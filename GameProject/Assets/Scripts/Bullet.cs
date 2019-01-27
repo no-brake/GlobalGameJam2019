@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         /*          if(col.gameObject.tag == "Enemy")
                  {
