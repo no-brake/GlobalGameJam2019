@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
             {
                 gameState.houseHealth -= houseHealthDamageValue;
                 print("house health: " + gameState.houseHealth);
-
+                
                 Destroy(gameObject);
             }
         }

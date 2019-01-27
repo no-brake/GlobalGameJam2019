@@ -24,7 +24,7 @@ public class GameState : MonoBehaviour
     {
         if(this.houseHealth <= 0)
         {
-            text.text = "DU TOT";
+            text.text = "DU BIST TOT!";
         }
     }
 }
