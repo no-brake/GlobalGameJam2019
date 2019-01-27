@@ -43,7 +43,7 @@ public class GameState : MonoBehaviour
             GameObject.Find("lightAreaDay3").SetActive(false);
         }
 
-        if(GlobalState.day == 2)
+        if(GlobalState.day >= 2)
             {   
                 GameObject parent = GameObject.Find("Spawner");
                 Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
@@ -54,7 +54,7 @@ public class GameState : MonoBehaviour
                     }
                 } 
             }
-            if(GlobalState.day == 3)
+            if(GlobalState.day >= 3)
             {
                 GameObject parent = GameObject.Find("Spawner");
                 Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
