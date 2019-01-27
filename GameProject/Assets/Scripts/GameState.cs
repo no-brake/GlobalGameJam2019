@@ -37,10 +37,10 @@ public class GameState : MonoBehaviour
         List<Spawner> sMListe = GameObject.Find("SpawnManager").GetComponent<SpawnManager>().spawners;
         print(sMListe.Count);
         if(GlobalState.day == 1){
-            GameObject.Find("shootAreaDay2").SetActive(false);
+            GameObject.Find("lightAreaDay2").SetActive(false);
         }
-        if(GlobalState.day == 1 || GlobalState.day == 1 ){
-            GameObject.Find("leftBottomAreaDay3").SetActive(false);
+        if(GlobalState.day <=2 ){
+            GameObject.Find("lightAreaDay3").SetActive(false);
         }
 
         if(GlobalState.day == 2)
@@ -48,9 +48,9 @@ public class GameState : MonoBehaviour
                 GameObject parent = GameObject.Find("Spawner");
                 Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
                 foreach(Transform t in trs){
-                    if(t.name == "Spawner_Vert_Win7"){
+                    if(t.name == "Spawner_Vert_Win7")
+                    {
                         sMListe.Add(t.gameObject.GetComponent<Spawner>());
-                        //print(sMListe.Count);
                     }
                 } 
             }
@@ -59,15 +59,12 @@ public class GameState : MonoBehaviour
                 GameObject parent = GameObject.Find("Spawner");
                 Transform[] trs= parent.GetComponentsInChildren<Transform>(true);
                 foreach(Transform t in trs){
-                   if(t.name == "Spawner_Hori_Win6"){
+                   if(t.name == "Spawner_Hori_Win6")
+                   {
                      sMListe.Add(t.gameObject.GetComponent<Spawner>());
-                     print(sMListe.Count);
                     }
                 } 
             }
-        //}
-
-
     }
 
     // Update is called once per frame

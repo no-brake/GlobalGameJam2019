@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6934479021385890759}
   - component: {fileID: 6934479021385890758}
   - component: {fileID: 6934479021385890757}
+  - component: {fileID: 7021827919462508580}
   - component: {fileID: 6934479021385890753}
   m_Layer: 0
   m_Name: shootArea
@@ -92,6 +93,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7021827919462508580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934479021385890756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1e546a103a1d4b8e2fc5e7d9c8b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  darkness: []
 --- !u!54 &6934479021385890753
 Rigidbody:
   m_ObjectHideFlags: 0
